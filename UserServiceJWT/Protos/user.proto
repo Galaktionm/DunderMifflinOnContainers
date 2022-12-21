@@ -1,0 +1,44 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "UserService";
+
+package UserService;
+
+service UserGrpc {
+   rpc ValidateBalance (BalanceValidationRequest) returns (BalanceValidationResponse);
+   rpc SaveOrder (OrderGrpc) returns (OrderReceivedValidation);
+}
+
+
+message OrderGrpc {
+	int64 order_id=1;
+	string user_id=2;
+	repeated OrderedProductGrpc products=3;
+}
+
+message OrderedProductGrpc{
+	string id=2;
+	string name=3;
+	double price=4;
+	int32 amount=5;
+	string manufacturer=6;
+	string additionalInfo=7;
+}
+
+message OrderReceivedValidation {
+	bool result=1;
+	string message=2;
+}
+
+
+
+message BalanceValidationRequest {
+	string user_id=1;
+	double payment=2;
+}
+
+message BalanceValidationResponse {
+	bool result =1;
+	string message=2;
+	double amountChanged=3;
+}

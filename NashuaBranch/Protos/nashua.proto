@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option csharp_namespace = "NashuaBranch";
+
+package NashuaProducts;
+
+service NashuaGrpcService {
+  rpc PlaceOrder (OrderedProducts) returns (CheckResult);
+  rpc GetOrderNumber (NOrdersRequest) returns (NOrders);
+}
+
+message OrderedProducts{
+	string user_id=1;
+	repeated OrderedProduct products=2;
+
+}
+
+message OrderedProduct{
+	string id=2;
+	string name=3;
+	double price=4;
+	int32 amount=5;
+	string manufacturer=6;
+	string additionalInfo=7;
+
+}
+
+message CheckResult {
+	bool result=1;
+	string message=2;
+}
+
+message NOrdersRequest{
+	string message=1;
+}
+
+message NOrders {
+	int32 number=1;
+}
+

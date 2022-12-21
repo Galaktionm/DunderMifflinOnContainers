@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "WXvWmB6KtIZjKDKl9SRvC7U8FyzZMqoNhwXLZ/QUTpc=",
+  "Source": "UserServiceJWT",
+  "BasePath": "_content/UserServiceJWT",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

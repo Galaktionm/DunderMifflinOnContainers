@@ -1,0 +1,40 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "OrderService";
+
+package Order;
+
+
+service Order {
+  rpc ProcessOrder (OrderedProducts) returns (ProcessResult);
+}
+
+message OrderedProducts {
+	string user_id=1;
+	repeated OrderedProduct products=2;
+
+}
+
+
+message OrderedProduct{
+	string id=2;
+	string name=3;
+	double price=4;
+	int32 amount=5;
+	string manufacturer=6;
+	string additionalInfo=7;
+
+}
+
+
+message ProcessResult {
+	bool result=1;
+	string message=2;
+}
+
+message CheckResult {
+	bool result=1;
+	string message=2;
+}
+
+

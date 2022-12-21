@@ -1,0 +1,2 @@
+obj\Debug\net6.0\Protos/Nashua.cs \
+obj\Debug\net6.0\Protos/NashuaGrpc.cs: Protos/nashua.proto

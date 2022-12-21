@@ -1,0 +1,17 @@
+ 
+<form method="POST" [formGroup]="loginForm" (ngSubmit)="submitLogin()" class="container">
+
+    <label for="email" class="form-label">Email: </label>
+    <input type="email" formControlName="email" name="email" id="email" class="form-control"> 
+
+    <label for="password" class="form-label">Password: </label>
+    <input type="password" formControlName="password" name="password" id="password" class="form-control">
+
+    <button type="submit" class="btn btn-dark mt-1">Log in</button>
+
+</form>
+
+<div class="container mt-2 p-1">
+    <label for="registerButton" class="form-label">Not already registered?</label>
+    <a routerLink="/register"><button id="registerButton" class="btn btn-danger m-1">Register</button></a>
+</div>

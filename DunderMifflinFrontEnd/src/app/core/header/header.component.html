@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand navbar-black bg-black">
+    <div class="container-fluid">
+    <img src="./assets/dmLogo.png" routerLink="/" class="nav-link">
+    <ul class="navbar-nav me-auto">
+    <li class="nav-item">
+    <a class="nav-link text-white fw-semibold" routerLink="/products">Products</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link text-white fw-semibold" routerLink="/aboutUs">About us</a>
+    </li>
+    <li *ngIf="isAuthenticated">
+        <a routerLink="/cart" class="nav-link text-white fw-semibold">Cart</a>
+    </li>
+    <li *ngIf="isAuthenticated">
+        <a routerLink="/account" class="nav-link text-white fw-semibold">Account</a>
+    </li>
+    <li *ngIf="!isAuthenticated">
+        <a routerLink="/login" class="nav-link text-white fw-semibold">Login</a>
+    </li>
+    <li *ngIf="!isAuthenticated">
+        <a  routerLink="/register" class="nav-link text-white fw-semibold">Register</a>
+    </li>  
+    </ul>
+    </div>
+</nav>

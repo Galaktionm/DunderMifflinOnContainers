@@ -1,0 +1,14 @@
+<form method="POST" [formGroup]="registrationForm" (ngSubmit)="submitRegistration()">
+
+    <label for="username">Enter your username: </label>
+    <input type="text" formControlName="username" name="username" id="username">
+
+    <label for="email">Enter your email: </label>
+    <input type="email" formControlName="email" name="email" id="email">
+
+    <label for="password">Enter your password: </label>
+    <input type="password" formControlName="password" name="password" id="password">
+
+    <button type="submit">Register</button>
+
+</form>

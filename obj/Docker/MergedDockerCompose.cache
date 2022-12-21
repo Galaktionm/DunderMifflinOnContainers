@@ -1,0 +1,16 @@
+services:
+  aggregator:
+    build:
+      context: C:\Users\Administrator\Desktop\DMGit
+      dockerfile: BasketService/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: aggregator
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\Administrator\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Administrator\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'
