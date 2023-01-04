@@ -66,7 +66,12 @@ using (var scope = app.Services.CreateScope())
         dbContext.Database.Migrate();
     }
     var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
-    var x = await roleManager.CreateAsync(new IdentityRole("User"));
+    var userRole = await roleManager.CreateAsync(new IdentityRole("User"));
+    var adminRole = await roleManager.CreateAsync(new IdentityRole("Administrator"));
+    var userManager=scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+    var admin = new User("Gaga", "gaga.metreveli.5@gmail.com", 200000000000);
+    var createdUser=await userManager.CreateAsync(admin, builder.Configuration["AdminPassword"]);
+    await userManager.AddToRoleAsync(admin, "Administrator");  
 }
 
 // Configure the HTTP request pipeline.

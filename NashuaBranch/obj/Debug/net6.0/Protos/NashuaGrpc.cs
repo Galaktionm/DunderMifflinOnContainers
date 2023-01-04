@@ -70,6 +70,14 @@ namespace NashuaBranch {
         __Marshaller_NashuaProducts_NOrdersRequest,
         __Marshaller_NashuaProducts_NOrders);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::NashuaBranch.OrderedProducts, global::NashuaBranch.CheckResult> __Method_SaveProducts = new grpc::Method<global::NashuaBranch.OrderedProducts, global::NashuaBranch.CheckResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SaveProducts",
+        __Marshaller_NashuaProducts_OrderedProducts,
+        __Marshaller_NashuaProducts_CheckResult);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -92,6 +100,12 @@ namespace NashuaBranch {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::NashuaBranch.CheckResult> SaveProducts(global::NashuaBranch.OrderedProducts request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -101,7 +115,8 @@ namespace NashuaBranch {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_PlaceOrder, serviceImpl.PlaceOrder)
-          .AddMethod(__Method_GetOrderNumber, serviceImpl.GetOrderNumber).Build();
+          .AddMethod(__Method_GetOrderNumber, serviceImpl.GetOrderNumber)
+          .AddMethod(__Method_SaveProducts, serviceImpl.SaveProducts).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -113,6 +128,7 @@ namespace NashuaBranch {
     {
       serviceBinder.AddMethod(__Method_PlaceOrder, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::NashuaBranch.OrderedProducts, global::NashuaBranch.CheckResult>(serviceImpl.PlaceOrder));
       serviceBinder.AddMethod(__Method_GetOrderNumber, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::NashuaBranch.NOrdersRequest, global::NashuaBranch.NOrders>(serviceImpl.GetOrderNumber));
+      serviceBinder.AddMethod(__Method_SaveProducts, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::NashuaBranch.OrderedProducts, global::NashuaBranch.CheckResult>(serviceImpl.SaveProducts));
     }
 
   }

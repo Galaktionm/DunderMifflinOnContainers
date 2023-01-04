@@ -28,7 +28,7 @@ namespace ProductService.Controllers
         [HttpGet("all")]
         public async Task<IEnumerable<Product>> GetAllItemsAsync()
         {
-            var list = await service.GetAsync();
+            var list = await service.GetBySentAsync();
             return list;
         }
 

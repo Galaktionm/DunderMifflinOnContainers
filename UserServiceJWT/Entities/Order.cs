@@ -24,9 +24,10 @@ namespace UserServiceJWT.Entities
             this.user_id=user_id;
         }
 
-        public Order(long order_id, List<OrderedProduct> orderedProducts)
+        public Order(long order_id, string user_id, List<OrderedProduct> orderedProducts)
         {
             this.order_id = order_id;
+            this.user_id = user_id;
             this.orderedProducts = orderedProducts;
         }
     }

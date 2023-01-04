@@ -21,6 +21,11 @@ builder.Services.AddGrpcClient<ProductService.ProductGrpcProtoService.ProductGrp
     options.Address = new Uri("http://productservice:5152");
 });
 
+builder.Services.AddGrpcClient<UserService.UserGrpc.UserGrpcClient>(options =>
+{
+    options.Address = new Uri("http://userservicejwt:5015");
+});
+
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.Listen(IPAddress.Any, 80, listenOptions =>

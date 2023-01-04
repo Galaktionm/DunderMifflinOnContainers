@@ -70,6 +70,14 @@ namespace ScrantonBranch {
         __Marshaller_ScrantonProducts_NOrdersRequest,
         __Marshaller_ScrantonProducts_NOrders);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::ScrantonBranch.OrderedProducts, global::ScrantonBranch.CheckResult> __Method_SaveProducts = new grpc::Method<global::ScrantonBranch.OrderedProducts, global::ScrantonBranch.CheckResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SaveProducts",
+        __Marshaller_ScrantonProducts_OrderedProducts,
+        __Marshaller_ScrantonProducts_CheckResult);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -92,6 +100,12 @@ namespace ScrantonBranch {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::ScrantonBranch.CheckResult> SaveProducts(global::ScrantonBranch.OrderedProducts request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -101,7 +115,8 @@ namespace ScrantonBranch {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_PlaceOrder, serviceImpl.PlaceOrder)
-          .AddMethod(__Method_GetOrderNumber, serviceImpl.GetOrderNumber).Build();
+          .AddMethod(__Method_GetOrderNumber, serviceImpl.GetOrderNumber)
+          .AddMethod(__Method_SaveProducts, serviceImpl.SaveProducts).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -113,6 +128,7 @@ namespace ScrantonBranch {
     {
       serviceBinder.AddMethod(__Method_PlaceOrder, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ScrantonBranch.OrderedProducts, global::ScrantonBranch.CheckResult>(serviceImpl.PlaceOrder));
       serviceBinder.AddMethod(__Method_GetOrderNumber, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ScrantonBranch.NOrdersRequest, global::ScrantonBranch.NOrders>(serviceImpl.GetOrderNumber));
+      serviceBinder.AddMethod(__Method_SaveProducts, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ScrantonBranch.OrderedProducts, global::ScrantonBranch.CheckResult>(serviceImpl.SaveProducts));
     }
 
   }

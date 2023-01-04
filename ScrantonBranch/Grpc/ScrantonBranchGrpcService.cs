@@ -1,6 +1,7 @@
 ﻿using Grpc.Core;
 using ScrantonBranch.Entities;
 using UserService;
+using ProductService;
 
 namespace ScrantonBranch.Grpc
 {
@@ -8,11 +9,13 @@ namespace ScrantonBranch.Grpc
     {
         private readonly DatabaseContext databaseContext;
         private readonly UserGrpc.UserGrpcClient userGrpcClient;
+        private readonly ProductGrpcProtoService.ProductGrpcProtoServiceClient productClient;
 
-        public ScrantonBranchGrpcService(DatabaseContext database, UserGrpc.UserGrpcClient userGrpcClient)
+        public ScrantonBranchGrpcService(DatabaseContext database, UserGrpc.UserGrpcClient userGrpcClient, ProductGrpcProtoService.ProductGrpcProtoServiceClient productClient)
         {
             databaseContext = database;
             this.userGrpcClient = userGrpcClient;
+            this.productClient = productClient;
         }
 
         public async override Task<CheckResult> PlaceOrder(OrderedProducts products, ServerCallContext context)
@@ -41,12 +44,23 @@ namespace ScrantonBranch.Grpc
                 Order order = new Order(products.UserId, orderedProductEntities);
                 databaseContext.Add(order);
                 databaseContext.SaveChanges();
-                userGrpcClient.SaveOrder(MapToUserServiceOrderGrpc(order));
-                return new CheckResult
+                var saveOrderResponse=userGrpcClient.SaveOrder(MapToUserServiceOrderGrpc(order));
+                if (saveOrderResponse.Result)
                 {
-                    Result = true,
-                    Message = "Order placed successfully at Scranton branch"
-                };
+                    SendUpdateRequest(order);
+                    return new CheckResult
+                    {
+                        Result = true,
+                        Message = "Order placed successfully at Scranton branch"
+                    };
+                } else
+                {
+                    return new CheckResult
+                    {
+                        Result = false,
+                        Message = "Placing order failed due to errors in user process"
+                    };
+                }
             } else
             {
                 return new CheckResult
@@ -57,6 +71,27 @@ namespace ScrantonBranch.Grpc
             }
 
 
+        }
+
+        public override Task<CheckResult> SaveProducts(OrderedProducts orderedProducts, ServerCallContext context)
+        {
+            List<OrderedProductEntity> orderedProductsEntities = new List<OrderedProductEntity>();
+            foreach(OrderedProduct orderedProduct in orderedProducts.Products)
+            {
+                orderedProductsEntities.Add(MapToOrderedProductEntity(orderedProduct));
+            }
+
+            foreach(OrderedProductEntity orderedProduct in orderedProductsEntities)
+            {
+                databaseContext.Add(orderedProduct);
+            }
+            databaseContext.SaveChanges();
+            
+            return Task.FromResult(new CheckResult
+            {
+                Result = true,
+                Message = "ProductsSaved"
+            });
         }
 
         public async Task<BalanceValidationResponse> ValidatePayment(List<OrderedProductEntity> products, string userId)
@@ -81,6 +116,23 @@ namespace ScrantonBranch.Grpc
             {
                 Number = 1+databaseContext.Orders.Count()
             });         
+        }
+
+        private async void SendUpdateRequest(Order order)
+        {
+            ProductUpdateRequests requests=new ProductUpdateRequests();
+            var list = order.products;
+            foreach(var product in list)
+            {
+                requests.UpdateRequests.Add(new ProductUpdateRequest
+                {
+                    Id = product.product_id,
+                    Ordered = product.amount,
+                }
+               );
+            }
+
+         await productClient.UpdateProductAsync(requests);
         }
 
         private OrderedProductEntity MapToOrderedProductEntity(OrderedProduct grpcProduct)
@@ -117,6 +169,11 @@ namespace ScrantonBranch.Grpc
             return orderGrpc;
 
         }
-    
+
+
+
+
+
+
     }
 }

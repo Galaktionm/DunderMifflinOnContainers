@@ -57,7 +57,7 @@ using(var scope = app.Services.CreateScope())
      }
     var service = scope.ServiceProvider.GetService<ProductRequestService>();
     List<ProductRequestDTO> dtoList=new List<ProductRequestDTO>();
-    dtoList.Add(new ProductRequestDTO("", "White", 200, 20));
+    dtoList.Add(new ProductRequestDTO("", "White", 200));
     service.SaveProducts(dtoList);
 }
 

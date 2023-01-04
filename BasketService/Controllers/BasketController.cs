@@ -31,7 +31,7 @@ namespace Aggregator.Controllers
         }
 
         [HttpPost("{id}")]
-        public async Task<OrderService.ProcessResult> PlaceOrder(string id)
+        public async Task<IActionResult> PlaceOrder(string id)
         {
             var basket = await GetCustomerBasket(id);
             if (basket != null)
@@ -40,14 +40,14 @@ namespace Aggregator.Controllers
                 if (processResult.Result == true)
                 {
                     redis.DeleteBasket(id);
+                    return Ok(new {message=processResult.Message, result=true});
+                } else
+                {
+                    return BadRequest(new { message = processResult.Message, result=false});
                 }
-                return processResult;
+                
             }
-            return new OrderService.ProcessResult
-            {
-                Result = false,
-                Message = "The cart is not created"
-            };
+            return BadRequest(new { message = "The cart is not created", result=false });
         }
 
         [HttpPost("remove")]

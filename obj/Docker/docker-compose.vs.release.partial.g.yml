@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   aggregator:
-    container_name: Aggregator_1
+    container_name: Aggregator
     build:
       labels:
         com.microsoft.created-by: "visual-studio"

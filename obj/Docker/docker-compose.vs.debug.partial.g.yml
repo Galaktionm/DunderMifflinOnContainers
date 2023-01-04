@@ -3,7 +3,7 @@ version: '3.4'
 services:
   aggregator:
     image: aggregator:dev
-    container_name: Aggregator_1
+    container_name: Aggregator
     build:
       target: base
       labels:

@@ -22,6 +22,15 @@ builder.WebHost.ConfigureKestrel(options =>
     });
 });
 
+builder.Services.AddGrpcClient<ScrantonBranch.ScrantonGrpcService.ScrantonGrpcServiceClient>(options =>
+{
+    options.Address = new Uri("http://scrantonbranch:5122");
+});
+builder.Services.AddGrpcClient<NashuaBranch.NashuaGrpcService.NashuaGrpcServiceClient>(options =>
+{
+    options.Address = new Uri("http://nashuabranch:5008");
+});
+
 builder.Services.AddGrpc();
 builder.Services.AddControllers();  
 

@@ -25,7 +25,9 @@ namespace ProductService.Grpc
                     {
                         var productToAdd = MapToResponseProduct(dbProduct, product.Amount);
                         responseProducts.ResponseProductList.Add(productToAdd);
-
+                        Product updatedProduct = new Product(dbProduct.name, dbProduct.price, dbProduct.available - product.Amount, 
+                            dbProduct.sent+product.Amount, dbProduct.additionalInfo, dbProduct.manufacturer);
+                        await service.UpdateAsync(dbProduct.id, updatedProduct);
                     }
                     else
                     {
@@ -42,6 +44,21 @@ namespace ProductService.Grpc
                 
             }
             return responseProducts;
+        }
+
+        public override async Task<ProductUpdateResult> UpdateProduct(ProductUpdateRequests requests, ServerCallContext context)
+        {
+            foreach (ProductUpdateRequest request in requests.UpdateRequests)
+            {
+                Product product = await service.GetAsync(request.Id);
+                product.sent -= request.Ordered;
+                await service.UpdateAsync(request.Id, product);
+            }
+
+            return new ProductUpdateResult
+            {
+                Result = true
+            };
         }
 
 

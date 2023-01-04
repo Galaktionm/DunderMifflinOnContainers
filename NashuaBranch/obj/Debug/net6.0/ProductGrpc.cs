@@ -49,6 +49,10 @@ namespace ProductService {
     static readonly grpc::Marshaller<global::ProductService.RequestedProducts> __Marshaller_Products_RequestedProducts = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ProductService.RequestedProducts.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::ProductService.ResponseProducts> __Marshaller_Products_ResponseProducts = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ProductService.ResponseProducts.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::ProductService.ProductUpdateRequests> __Marshaller_Products_ProductUpdateRequests = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ProductService.ProductUpdateRequests.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::ProductService.ProductUpdateResult> __Marshaller_Products_ProductUpdateResult = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ProductService.ProductUpdateResult.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::ProductService.RequestedProducts, global::ProductService.ResponseProducts> __Method_SendProducts = new grpc::Method<global::ProductService.RequestedProducts, global::ProductService.ResponseProducts>(
@@ -57,6 +61,14 @@ namespace ProductService {
         "SendProducts",
         __Marshaller_Products_RequestedProducts,
         __Marshaller_Products_ResponseProducts);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::ProductService.ProductUpdateRequests, global::ProductService.ProductUpdateResult> __Method_UpdateProduct = new grpc::Method<global::ProductService.ProductUpdateRequests, global::ProductService.ProductUpdateResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UpdateProduct",
+        __Marshaller_Products_ProductUpdateRequests,
+        __Marshaller_Products_ProductUpdateResult);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -110,6 +122,26 @@ namespace ProductService {
       public virtual grpc::AsyncUnaryCall<global::ProductService.ResponseProducts> SendProductsAsync(global::ProductService.RequestedProducts request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_SendProducts, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::ProductService.ProductUpdateResult UpdateProduct(global::ProductService.ProductUpdateRequests request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UpdateProduct(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::ProductService.ProductUpdateResult UpdateProduct(global::ProductService.ProductUpdateRequests request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_UpdateProduct, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::ProductService.ProductUpdateResult> UpdateProductAsync(global::ProductService.ProductUpdateRequests request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UpdateProductAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::ProductService.ProductUpdateResult> UpdateProductAsync(global::ProductService.ProductUpdateRequests request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_UpdateProduct, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

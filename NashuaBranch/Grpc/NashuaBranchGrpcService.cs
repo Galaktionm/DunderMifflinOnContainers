@@ -40,13 +40,24 @@ namespace NashuaBranch.Grpc
             {
                 Order order = new Order(products.UserId, orderedProductEntities);
                 databaseContext.Add(order);
-                databaseContext.SaveChanges();
-                userGrpcClient.SaveOrder(MapToUserServiceOrderGrpc(order));
-                return new CheckResult
+                databaseContext.SaveChanges();                
+                var saveOrderResponse = userGrpcClient.SaveOrder(MapToUserServiceOrderGrpc(order));
+                if (saveOrderResponse.Result)
                 {
-                    Result = true,
-                    Message = "Order placed successfully at Nashua branch"
-                };
+                    return new CheckResult
+                    {
+                        Result = true,
+                        Message = "Order placed successfully at Nashua branch"
+                    };
+                }
+                else
+                {
+                    return new CheckResult
+                    {
+                        Result = false,
+                        Message = "Placing order failed due to errors in user process"
+                    };
+                }
             }
             else
             {
@@ -58,8 +69,29 @@ namespace NashuaBranch.Grpc
             }
         }
 
+        public override Task<CheckResult> SaveProducts(OrderedProducts orderedProducts, ServerCallContext context)
+        {
+            List<OrderedProductEntity> orderedProductsEntities = new List<OrderedProductEntity>();
+            foreach (OrderedProduct orderedProduct in orderedProducts.Products)
+            {
+                orderedProductsEntities.Add(MapToOrderedProductEntity(orderedProduct));
+            }
 
-           public async Task<BalanceValidationResponse> ValidatePayment(List<OrderedProductEntity> products, string userId)
+            foreach (OrderedProductEntity orderedProduct in orderedProductsEntities)
+            {
+                databaseContext.Add(orderedProduct);
+            }
+            databaseContext.SaveChanges();
+
+            return Task.FromResult(new CheckResult
+            {
+                Result = true,
+                Message = "ProductsSaved"
+            });
+        }
+
+
+        public async Task<BalanceValidationResponse> ValidatePayment(List<OrderedProductEntity> products, string userId)
             {
             double price = 0;
             foreach (var product in products)
@@ -74,13 +106,12 @@ namespace NashuaBranch.Grpc
             });
         }
 
-        public async override Task<NOrders> GetOrderNumber(NOrdersRequest request, ServerCallContext context)
+       public override Task<NOrders> GetOrderNumber(NOrdersRequest request, ServerCallContext context)
         {
-            
-            return new NOrders
+            return Task.FromResult(new NOrders
             {
                 Number = 1+databaseContext.Orders.Count()
-            };         
+            });         
         }
 
         private OrderedProductEntity MapToOrderedProductEntity(OrderedProduct grpcProduct)

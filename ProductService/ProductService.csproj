@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\product.proto" GrpcServices="Server" />
+    <Protobuf Include="..\ScrantonBranch\Protos\scranton.proto" GrpcServices="Client" />
+    <Protobuf Include="..\NashuaBranch\Protos\nashua.proto" GrpcServices="Client" />
   </ItemGroup>
 
   <ItemGroup>

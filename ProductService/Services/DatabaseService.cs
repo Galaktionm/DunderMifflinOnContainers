@@ -31,6 +31,9 @@ public class DatabaseService
     public async Task<Product?> GetAsync(string id) =>
         await productCollection.Find(x => x.id == id).FirstOrDefaultAsync();
 
+    public async Task<List<Product>> GetBySentAsync(int sent=0) =>
+        await productCollection.Find(x => x.sent > sent).ToListAsync();
+   
     public async Task CreateAsync(Product product) =>
         await productCollection.InsertOneAsync(product);
 

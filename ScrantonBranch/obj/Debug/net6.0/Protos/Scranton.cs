@@ -33,11 +33,13 @@ namespace ScrantonBranch {
             "ZXN1bHQYASABKAgSDwoHbWVzc2FnZRgCIAEoCSIhCg5OT3JkZXJzUmVxdWVz",
             "dBIPCgdtZXNzYWdlGAEgASgJIhkKB05PcmRlcnMSDgoGbnVtYmVyGAEgASgF",
             "IjoKF09yZGVyUmVjZWl2ZWRWYWxpZGF0aW9uEg4KBnJlc3VsdBgBIAEoCBIP",
-            "CgdtZXNzYWdlGAIgASgJMrQBChNTY3JhbnRvbkdycGNTZXJ2aWNlEk4KClBs",
+            "CgdtZXNzYWdlGAIgASgJMoYCChNTY3JhbnRvbkdycGNTZXJ2aWNlEk4KClBs",
             "YWNlT3JkZXISIS5TY3JhbnRvblByb2R1Y3RzLk9yZGVyZWRQcm9kdWN0cxod",
             "LlNjcmFudG9uUHJvZHVjdHMuQ2hlY2tSZXN1bHQSTQoOR2V0T3JkZXJOdW1i",
             "ZXISIC5TY3JhbnRvblByb2R1Y3RzLk5PcmRlcnNSZXF1ZXN0GhkuU2NyYW50",
-            "b25Qcm9kdWN0cy5OT3JkZXJzQhGqAg5TY3JhbnRvbkJyYW5jaGIGcHJvdG8z"));
+            "b25Qcm9kdWN0cy5OT3JkZXJzElAKDFNhdmVQcm9kdWN0cxIhLlNjcmFudG9u",
+            "UHJvZHVjdHMuT3JkZXJlZFByb2R1Y3RzGh0uU2NyYW50b25Qcm9kdWN0cy5D",
+            "aGVja1Jlc3VsdEIRqgIOU2NyYW50b25CcmFuY2hiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {

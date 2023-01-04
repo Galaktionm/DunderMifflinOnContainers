@@ -21,24 +21,29 @@ namespace OrderService.Grpc
 
         public override async Task<ProcessResult> ProcessOrder(OrderedProducts products, ServerCallContext context)
         {
-            var x = client;
-            if (client.Equals("Scranton"))
-            {
-                var result=SendToScranton(products);
-                if (result.Result == false)
+
+                ProcessResult result;
+                if (client.Equals("Scranton"))
                 {
-                    return SendToNashua(products);
+                    result = SendToScranton(products);
+                    if (result.Result == false)
+                    {
+                        result=SendToNashua(products);
+                    }
                 }
+                else
+                {
+                    result = SendToNashua(products);
+                    if (result.Result == false)
+                    {
+                        result = SendToScranton(products);
+                    }                   
+                }
+
                 return result;
-            } else
-            {
-                var nashuaResult=SendToNashua(products);
-                if (nashuaResult.Result == false)
-                {
-                    return SendToScranton(products);
-                }
-                return nashuaResult;
-            }
+
+
+            
         }
 
         private ProcessResult SendToScranton(OrderedProducts products) {

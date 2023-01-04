@@ -30,10 +30,19 @@ namespace UserServiceJWT.Controllers
         [HttpPost("account")]
         public async Task<IActionResult> GetUserAccount(UserRequest request)
         {
-            var user = await userManager.FindByIdAsync(request.userId);
+            var user = await userManager.FindByIdAsync(request.userId);          
             if (user != null)
             {
-                return Ok(new UserResponse(user.UserName, user.Email, user.balance));
+                List<Order> orders = new List<Order>();
+                var orderQuery = from entity in context.Orders where entity.user_id == user.Id select entity;
+                List<Order> orderQueryList=orderQuery.ToList();
+                foreach(Order order in orderQueryList){
+                    var orderedItemsQuery=from item in context.OrderedProducts where item.order_id==order.order_id select item;
+                    Order createdOrder = new Order(order.order_id, order.user_id, orderedItemsQuery.ToList());
+                    orders.Add(createdOrder);
+                }
+                
+                return Ok(new UserResponse(user.UserName, user.Email, user.balance, orders));
             }
             return NoContent();
 
@@ -100,11 +109,22 @@ namespace UserServiceJWT.Controllers
 
         public double balance { get; set; }
 
+        public List<Order> orders { get; set; }
+
         public UserResponse(string username, string email, double balance)
         {
             this.username = username;
             this.email = email;
             this.balance = balance;
+            this.orders = new List<Order>();
+        }
+
+        public UserResponse(string username, string email, double balance, List<Order> orders)
+        {
+            this.username = username;
+            this.email = email;
+            this.balance = balance;
+            this.orders = orders;
         }
     }
 

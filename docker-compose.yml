@@ -19,6 +19,8 @@ services:
     build:
       context: .
       dockerfile: BasketService/Dockerfile
+    ports:
+    - 7098:80
     depends_on:
     - redis
 
@@ -27,6 +29,8 @@ services:
     build:
       context: .
       dockerfile: NashuaBranch/Dockerfile
+    ports:
+    - 7008:80
     depends_on:
     - postgres
     - productservice
@@ -36,6 +40,8 @@ services:
     build:
       context: .
       dockerfile: OrderService/Dockerfile
+    ports:
+    -  7023:80
     depends_on:
     - postgres
 
@@ -45,6 +51,8 @@ services:
     build:
       context: .
       dockerfile: ProductService/Dockerfile
+    ports:
+    - 7152:80 
     depends_on:
     - mongodb
 
@@ -54,6 +62,8 @@ services:
     build:
       context: .
       dockerfile: ScrantonBranch/Dockerfile
+    ports:
+    - 7122:80 
     depends_on:
     - postgres
     - productservice
@@ -64,6 +74,8 @@ services:
     build:
       context: .
       dockerfile: UserServiceJWT/Dockerfile
+    ports:
+    -  7015:80
     depends_on:
     - postgres
 

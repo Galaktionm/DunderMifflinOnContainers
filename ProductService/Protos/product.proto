@@ -6,6 +6,7 @@ package Products;
 
 service ProductGrpcProtoService {
   rpc SendProducts (RequestedProducts) returns (ResponseProducts);
+  rpc UpdateProduct (ProductUpdateRequests) returns (ProductUpdateResult);
 }
 
 message RequestedProducts{
@@ -15,7 +16,6 @@ message RequestedProducts{
 message RequestedProduct {
 	string id=1;
 	string name=2;
-	double price=3;
 	int32 amount=4;
 	bool continueIfAbsent=5;
 }
@@ -31,4 +31,17 @@ message ResponseProduct{
 	int32 available=4;
 	string manufacturer=5;
 	string additionalInfo=6;	
+}
+
+message ProductUpdateRequests {
+	repeated ProductUpdateRequest updateRequests=1;
+}
+
+message ProductUpdateRequest{
+	string id=1;
+	int32 ordered=2;
+}
+
+message ProductUpdateResult {
+	bool result=2;
 }

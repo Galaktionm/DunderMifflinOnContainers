@@ -8,18 +8,16 @@
 
         public int amount { get; set; }
 
-        public double price { get; set; }
 
         public bool continueIfAbsent { get; set; } = true;
 
         public ProductRequestDTO() { }
 
-        public ProductRequestDTO(string id, string name, int amount, double price)
+        public ProductRequestDTO(string id, string name, int amount)
         {
             this.id = id;
             this.name = name;
             this.amount = amount;
-            this.price = price;
         }
     }
 }

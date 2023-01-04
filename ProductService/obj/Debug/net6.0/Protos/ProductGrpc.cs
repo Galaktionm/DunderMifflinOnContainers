@@ -49,6 +49,10 @@ namespace ProductService {
     static readonly grpc::Marshaller<global::ProductService.RequestedProducts> __Marshaller_Products_RequestedProducts = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ProductService.RequestedProducts.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::ProductService.ResponseProducts> __Marshaller_Products_ResponseProducts = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ProductService.ResponseProducts.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::ProductService.ProductUpdateRequests> __Marshaller_Products_ProductUpdateRequests = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ProductService.ProductUpdateRequests.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::ProductService.ProductUpdateResult> __Marshaller_Products_ProductUpdateResult = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ProductService.ProductUpdateResult.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::ProductService.RequestedProducts, global::ProductService.ResponseProducts> __Method_SendProducts = new grpc::Method<global::ProductService.RequestedProducts, global::ProductService.ResponseProducts>(
@@ -57,6 +61,14 @@ namespace ProductService {
         "SendProducts",
         __Marshaller_Products_RequestedProducts,
         __Marshaller_Products_ResponseProducts);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::ProductService.ProductUpdateRequests, global::ProductService.ProductUpdateResult> __Method_UpdateProduct = new grpc::Method<global::ProductService.ProductUpdateRequests, global::ProductService.ProductUpdateResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UpdateProduct",
+        __Marshaller_Products_ProductUpdateRequests,
+        __Marshaller_Products_ProductUpdateResult);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -74,6 +86,12 @@ namespace ProductService {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::ProductService.ProductUpdateResult> UpdateProduct(global::ProductService.ProductUpdateRequests request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -82,7 +100,8 @@ namespace ProductService {
     public static grpc::ServerServiceDefinition BindService(ProductGrpcProtoServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_SendProducts, serviceImpl.SendProducts).Build();
+          .AddMethod(__Method_SendProducts, serviceImpl.SendProducts)
+          .AddMethod(__Method_UpdateProduct, serviceImpl.UpdateProduct).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -93,6 +112,7 @@ namespace ProductService {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ProductGrpcProtoServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_SendProducts, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ProductService.RequestedProducts, global::ProductService.ResponseProducts>(serviceImpl.SendProducts));
+      serviceBinder.AddMethod(__Method_UpdateProduct, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ProductService.ProductUpdateRequests, global::ProductService.ProductUpdateResult>(serviceImpl.UpdateProduct));
     }
 
   }

@@ -49,7 +49,6 @@ namespace ScrantonBranch.Services
                     {
                         Id = product.id,
                         Name = product.name,
-                        Price = product.price,
                         Amount = product.amount,
                         ContinueIfAbsent = product.continueIfAbsent,
                     });
